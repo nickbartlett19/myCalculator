@@ -11,45 +11,45 @@
     
     <h1> myCalculator </h1>
     <div class="background-box">
-    <div class="flex-row top-row">
-        <div class="flex-row-item grow-2"></div>
-        <div class="flex-row-item"></div>
-        <div class="flex-row-item grow-3" screen><span></span></div>
-    </div>
-    <div class="flex-grid">
-        <div class="flex-col">
-            <div class="flex-col-item" clear><span>AC</span></div>
-            <div class="flex-col-item" number><span>7</span></div>
-            <div class="flex-col-item" number><span>4</span></div>
-            <div class="flex-col-item" number><span>1</span></div>
-            
+        <div class="flex-row top-row">
+            <div class="flex-row-item grow-2" pastOperandBox></div>
+            <div class="flex-row-item" operatorBox></div>
+            <div class="flex-row-item grow-3" presOperandBox></div>
         </div>
-        <div class="flex-col">
-            <div class="flex-col-item" negate><span>&#xB1;</span></div>
-            <div class="flex-col-item" number><span>8</span></div>
-            <div class="flex-col-item" number><span>5</span></div>
-            <div class="flex-col-item" number><span>2</span></div>
-        </div>
-        <div class="flex-col">
-            <div class="flex-col-item" percent><span>&#x25;</span></div>
-            <div class="flex-col-item" number><span>9</span></div>
-            <div class="flex-col-item" number><span>6</span></div>
-            <div class="flex-col-item" number><span>3</span></div>
+        <div class="flex-grid">
+            <div class="flex-col">
+                <div class="flex-col-item" clear>AC</div>
+                <div class="flex-col-item" number>7</div>
+                <div class="flex-col-item" number>4</div>
+                <div class="flex-col-item" number>1</div>
+                
+            </div>
+            <div class="flex-col">
+                <div class="flex-col-item" negate>&#xB1;</div>
+                <div class="flex-col-item" number>8</div>
+                <div class="flex-col-item" number>5</div>
+                <div class="flex-col-item" number>2</div>
+            </div>
+            <div class="flex-col">
+                <div class="flex-col-item" percent>&#x25;</div>
+                <div class="flex-col-item" number>9</div>
+                <div class="flex-col-item" number>6</div>
+                <div class="flex-col-item" number>3</div>
+
+            </div>
+            <div class="flex-col">
+                <div class="flex-col-item" divide>÷</div>
+                <div class="flex-col-item" multiply>&#xD7;</div>
+                <div class="flex-col-item" subtract>-</div>
+                <div class="flex-col-item" add>+</div>
+            </div>
 
         </div>
-        <div class="flex-col">
-            <div class="flex-col-item" divide><span>÷</span></div>
-            <div class="flex-col-item" multiply><span>&#xD7;</span></div>
-            <div class="flex-col-item" subtract><span>-</span></div>
-            <div class="flex-col-item" add><span>+</span></div>
+        <div class="flex-row">
+            <div class="flex-row-item grow-2" number>0</div>
+            <div class="flex-row-item" decimal>.</div>
+            <div class="flex-row-item" equals>=</div>
         </div>
-
     </div>
-    <div class="flex-row">
-        <div class="flex-row-item grow-2" number><span>0</span></div>
-        <div class="flex-row-item" decimal><span>.</span></div>
-        <div class="flex-row-item" equals><span>=</span></div>
-    </div>
-</div>
 </body>
 </html>

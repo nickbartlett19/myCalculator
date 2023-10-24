@@ -6,7 +6,7 @@ body {
     flex-direction: column;
 }
 
-span {
+div {
     font-size: 30px;
 }
 
@@ -44,7 +44,7 @@ span {
 }
 
 .flex-col-item:hover, .flex-row-item:hover {
-    background-color: green;
+    background-color: lightblue;
 }
 
 .flex-row {
