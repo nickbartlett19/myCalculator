@@ -1,10 +1,11 @@
-// Todo when back on wed: figure out bug with event listeners. We want to
-// have the innerhtml of screen be the innerhtml of a SINGLE button
-// when it is clicked.
-
+// todo:
+// 1) box sizing when you input large numbers, should there be a size limit?
+// 2) refactor based on JS guys video
+// 3) "slide out" on the right side of calc for more advanced/custom functions
 
 const equalsBtn = document.querySelector('[equals]');
 const numberBtn = document.querySelectorAll('[number]');
+const zeroBtn = document.querySelector('[zero');
 const clearBtn = document.querySelector('[clear]')
 
 // top row, screen
@@ -23,12 +24,12 @@ const decimalBtn = document.querySelector('[decimal]');
 // console.log(equalsBtn.innerHTML);
 // console.log(equalsBtn);
 
-equalsBtn.addEventListener('click', (e)=> {
+equalsBtn.addEventListener('click', (e) => {
     // console.log("Wu - it works!");
 
-    console.log(operator.innerHTML);
+    // console.log(operator.innerHTML);
     const currOperator = decipherOperator(operator.innerHTML);
-    console.log(currOperator);
+    // console.log(currOperator);
 
     if (currOperator !== false) {
         var newPresOperand = '';
@@ -44,27 +45,36 @@ equalsBtn.addEventListener('click', (e)=> {
                 newPresOperand = Number(pastOperand.innerHTML) - Number(presOperand.innerHTML);
                 break;
             case("add"):
-                console.log(pastOperand.innerHTML);
                 newPresOperand = Number(pastOperand.innerHTML) + Number(presOperand.innerHTML);
                 break;
             default:
                 console.log("error with operator");            
         }
+        // console.log(newPresOperand);
+        pastOperand.innerHTML = '';
+        operator.innerHTML = '';
+        presOperand.innerHTML = '';
+        presOperand.innerHTML = newPresOperand; 
     }
-    console.log(newPresOperand);
-    pastOperand.innerHTML = '';
-    operator.innerHTML = '';
-    presOperand.innerHTML = '';
-    presOperand.innerHTML = newPresOperand; 
-
 })
 
 for (let i = 0; i < numberBtn.length; i++) {
     numberBtn[i].addEventListener('click', (e)=> {
+        if (presOperand.innerHTML === "0") {
+            presOperand.innerHTML = '';
+        }
+
         presOperand.innerHTML = presOperand.innerHTML + numberBtn[i].innerHTML;
         // console.log(numberBtn[i].innerHTML)
     })
 }
+
+zeroBtn.addEventListener('click', (e) => {
+    if (presOperand.innerHTML != "0") {
+        console.log()
+        presOperand.innerHTML = presOperand.innerHTML + zeroBtn.innerHTML;
+    }
+})
 
 clearBtn.addEventListener('click', (e) => {
     pastOperand.innerHTML = '';
@@ -80,6 +90,13 @@ decimalBtn.addEventListener('click', (e) => {
     }
 })
 
+negateBtn.addEventListener('click', e => {
+    presOperand.innerHTML = Number(presOperand.innerHTML) * (-1);
+})
+
+percentBtn.addEventListener('click', (e) => {
+    presOperand.innerHTML = Number(presOperand.innerHTML) * 100;
+})
 // operator buttons
 
 addBtn.addEventListener('click', (e) => {
@@ -109,7 +126,10 @@ divideBtn.addEventListener('click', (e) => {
 
 
 function decipherOperator(operator) {
-    if (operator === "÷") {
+    if (operator == "") {
+        return false;
+    }
+    else if (operator === "÷") {
         return "divide";
     }
     else if (operator === "×") {
