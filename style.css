@@ -80,3 +80,14 @@ div {
 .grow-3 {
     flex: 3;
 }
+
+/* google font class */
+.fascinate-inline-regular {
+    font-family: "Fascinate Inline", system-ui;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .white-text {
+    color: white;
+  }
