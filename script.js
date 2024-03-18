@@ -21,19 +21,12 @@ const negateBtn = document.querySelector('[negate]');
 const percentBtn = document.querySelector('[percent]');
 const decimalBtn = document.querySelector('[decimal]');
 
-// console.log(equalsBtn.innerHTML);
-// console.log(equalsBtn);
-
 equalsBtn.addEventListener('click', (e) => {
     // console.log("Wu - it works!");
-
-    // console.log(operator.innerHTML);
     const currOperator = decipherOperator(operator.innerHTML);
-    // console.log(currOperator);
 
     if (currOperator !== false) {
         var newPresOperand = '';
-        // newPresOperand = Number(newPresOperand);
         switch (currOperator) {
             case("divide"):
                 newPresOperand = Number(pastOperand.innerHTML) / Number(presOperand.innerHTML);
@@ -50,7 +43,6 @@ equalsBtn.addEventListener('click', (e) => {
             default:
                 console.log("error with operator");            
         }
-        // console.log(newPresOperand);
         pastOperand.innerHTML = '';
         operator.innerHTML = '';
         presOperand.innerHTML = '';
@@ -63,9 +55,7 @@ for (let i = 0; i < numberBtn.length; i++) {
         if (presOperand.innerHTML === "0") {
             presOperand.innerHTML = '';
         }
-
         presOperand.innerHTML = presOperand.innerHTML + numberBtn[i].innerHTML;
-        // console.log(numberBtn[i].innerHTML)
     })
 }
 
@@ -97,6 +87,7 @@ negateBtn.addEventListener('click', e => {
 percentBtn.addEventListener('click', (e) => {
     presOperand.innerHTML = Number(presOperand.innerHTML) * 100;
 })
+
 // operator buttons
 
 addBtn.addEventListener('click', (e) => {
@@ -123,7 +114,6 @@ divideBtn.addEventListener('click', (e) => {
     pastOperand.innerHTML = presOperand.innerHTML;
     presOperand.innerHTML = '';
 })
-
 
 function decipherOperator(operator) {
     if (operator == "") {
