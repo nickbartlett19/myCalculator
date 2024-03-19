@@ -3,30 +3,13 @@
 // 2) refactor based on JS guys video
 // 3) "slide out" on the right side of calc for more advanced/custom functions
 
-const equalsBtn = document.querySelector('[equals]');
-const numberBtn = document.querySelectorAll('[number]');
-const zeroBtn = document.querySelector('[zero');
-const clearBtn = document.querySelector('[clear]')
+class Calculator{
+    constructor() {
+        console.log("Constructing Calculator object...")
+    }
 
-// top row, screen
-const pastOperand = document.querySelector('[pastOperandBox]');
-const operator = document.querySelector('[operatorBox]');
-const presOperand = document.querySelector('[presOperandBox]');
-
-const addBtn = document.querySelector('[add]');
-const subtractBtn = document.querySelector('[subtract]');
-const multiplyBtn = document.querySelector('[multiply]');
-const divideBtn = document.querySelector('[divide]');
-const negateBtn = document.querySelector('[negate]');
-const percentBtn = document.querySelector('[percent]');
-const decimalBtn = document.querySelector('[decimal]');
-
-equalsBtn.addEventListener('click', (e) => {
-    // console.log("Wu - it works!");
-    const currOperator = decipherOperator(operator.innerHTML);
-
-    if (currOperator !== false) {
-        var newPresOperand = '';
+    compute(currOperator) {
+        let newPresOperand = '';
         switch (currOperator) {
             case("divide"):
                 newPresOperand = Number(pastOperand.innerHTML) / Number(presOperand.innerHTML);
@@ -48,16 +31,55 @@ equalsBtn.addEventListener('click', (e) => {
         presOperand.innerHTML = '';
         presOperand.innerHTML = newPresOperand; 
     }
+}
+const numberBtn = document.querySelectorAll('[number]');
+
+const equalsBtn = document.querySelector('[equals]');
+const zeroBtn = document.querySelector('[zero');
+const clearBtn = document.querySelector('[clear]')
+const addBtn = document.querySelector('[add]');
+const subtractBtn = document.querySelector('[subtract]');
+const multiplyBtn = document.querySelector('[multiply]');
+const divideBtn = document.querySelector('[divide]');
+const negateBtn = document.querySelector('[negate]');
+const percentBtn = document.querySelector('[percent]');
+const decimalBtn = document.querySelector('[decimal]');
+
+// top row, screen
+const pastOperand = document.querySelector('[pastOperandBox]');
+const operator = document.querySelector('[operatorBox]');
+const presOperand = document.querySelector('[presOperandBox]');
+
+calc = new Calculator(pastOperand, presOperand);
+
+equalsBtn.addEventListener('click', (e) => {
+    // loads the operator from the operatorbox 
+    let currOperator = decipherOperator(operator.innerHTML);
+
+    // if currOperator is truthy value like +, -, etc., 
+    // perform calculation for that operator
+    if (currOperator) {
+        calc.compute(currOperator)
+    }
 })
 
-for (let i = 0; i < numberBtn.length; i++) {
-    numberBtn[i].addEventListener('click', (e)=> {
-        if (presOperand.innerHTML === "0") {
-            presOperand.innerHTML = '';
-        }
-        presOperand.innerHTML = presOperand.innerHTML + numberBtn[i].innerHTML;
-    })
-}
+// for (let i = 0; i < numberBtn.length; i++) {
+//     numberBtn[i].addEventListener('click', (e) => {
+//         if (presOperand.innerHTML === "0") {
+//             presOperand.innerHTML = '';
+//         }
+//         presOperand.innerHTML = presOperand.innerHTML + numberBtn[i].innerHTML;
+//     })
+// }
+
+numberBtn.forEach((btn) => {btn.addEventListener('click', (e) => {
+    if (presOperand.innerHTML === "0") {
+        presOperand.innerHTML = '';
+    }
+    presOperand.innerHTML = presOperand.innerHTML + btn.innerHTML;
+})})
+
+
 
 zeroBtn.addEventListener('click', (e) => {
     if (presOperand.innerHTML != "0") {
