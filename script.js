@@ -4,32 +4,67 @@
 // 3) "slide out" on the right side of calc for more advanced/custom functions
 
 class Calculator{
-    constructor() {
-        console.log("Constructing Calculator object...")
+    constructor(pastOperand, presOperand, operator) {
+        this.pastOperand = pastOperand;
+        this.presOperand = presOperand;
+        this.operator = operator;
+        console.log("Constructing Calculator object...");
+        
+        // console.log("presOperand = " + presOperand.innerText);
     }
 
     compute(currOperator) {
         let newPresOperand = '';
         switch (currOperator) {
             case("divide"):
-                newPresOperand = Number(pastOperand.innerHTML) / Number(presOperand.innerHTML);
+                newPresOperand = Number(pastOperand.innerText) / Number(presOperand.innerText);
                 break;
             case("multiply"):
-                newPresOperand = Number(pastOperand.innerHTML) * Number(presOperand.innerHTML);
+                newPresOperand = Number(pastOperand.innerText) * Number(presOperand.innerText);
                 break;
             case("subtract"):
-                newPresOperand = Number(pastOperand.innerHTML) - Number(presOperand.innerHTML);
+                newPresOperand = Number(pastOperand.innerText) - Number(presOperand.innerText);
                 break;
             case("add"):
-                newPresOperand = Number(pastOperand.innerHTML) + Number(presOperand.innerHTML);
+                newPresOperand = Number(pastOperand.innerText) + Number(presOperand.innerText);
                 break;
             default:
                 console.log("error with operator");            
         }
-        pastOperand.innerHTML = '';
-        operator.innerHTML = '';
-        presOperand.innerHTML = '';
-        presOperand.innerHTML = newPresOperand; 
+        this.clear();
+        this.presOperand.innerText = newPresOperand;
+    }
+
+    clear() {
+        pastOperand.innerText = '';
+        operator.innerText = '';
+        presOperand.innerText = '';
+    }
+
+    equals() {
+        // loads the operator from the operatorbox 
+        let currOperator = this.decipherOperator(operator.innerText);
+
+        // if currOperator is truthy value like +, -, etc., 
+        // perform calculation for that operator
+        if (currOperator) {
+            calc.compute(currOperator)
+        }
+    }
+
+    append(value) {
+        presOperand.innerText = presOperand.innerText + value;
+    }
+
+    decipherOperator(operator) {
+        switch(operator) {
+            case "": return false;
+            case "÷": return "divide";
+            case "×": return "multiply";
+            case "-": return "subtract";
+            case "+": return "add";
+            default: return false; 
+        }
     }
 }
 const numberBtn = document.querySelectorAll('[number]');
@@ -50,110 +85,67 @@ const pastOperand = document.querySelector('[pastOperandBox]');
 const operator = document.querySelector('[operatorBox]');
 const presOperand = document.querySelector('[presOperandBox]');
 
-calc = new Calculator(pastOperand, presOperand);
+calc = new Calculator(pastOperand, presOperand, operator);
 
 equalsBtn.addEventListener('click', (e) => {
-    // loads the operator from the operatorbox 
-    let currOperator = decipherOperator(operator.innerHTML);
-
-    // if currOperator is truthy value like +, -, etc., 
-    // perform calculation for that operator
-    if (currOperator) {
-        calc.compute(currOperator)
-    }
+    calc.equals();
 })
 
-// for (let i = 0; i < numberBtn.length; i++) {
-//     numberBtn[i].addEventListener('click', (e) => {
-//         if (presOperand.innerHTML === "0") {
-//             presOperand.innerHTML = '';
-//         }
-//         presOperand.innerHTML = presOperand.innerHTML + numberBtn[i].innerHTML;
-//     })
-// }
-
 numberBtn.forEach((btn) => {btn.addEventListener('click', (e) => {
-    if (presOperand.innerHTML === "0") {
-        presOperand.innerHTML = '';
-    }
-    presOperand.innerHTML = presOperand.innerHTML + btn.innerHTML;
+    let btnInnerText = btn.innerText;
+    calc.append(btnInnerText);
 })})
 
-
-
 zeroBtn.addEventListener('click', (e) => {
-    if (presOperand.innerHTML != "0") {
-        console.log()
-        presOperand.innerHTML = presOperand.innerHTML + zeroBtn.innerHTML;
+    if (presOperand.innerText != "0") {
+        let value = zeroBtn.innerText;
+        calc.append(value)
     }
 })
 
 clearBtn.addEventListener('click', (e) => {
-    pastOperand.innerHTML = '';
-    operator.innerHTML = '';
-    presOperand.innerHTML = '';
+    calc.clear();
 })
 
 decimalBtn.addEventListener('click', (e) => {
-    let str = presOperand.innerHTML;
+    let str = presOperand.innerText;
 
     if (str.includes('.') == false) {
-        presOperand.innerHTML = presOperand.innerHTML + decimalBtn.innerHTML;
+        presOperand.innerText = presOperand.innerText + decimalBtn.innerText;
     }
 })
 
 negateBtn.addEventListener('click', e => {
-    presOperand.innerHTML = Number(presOperand.innerHTML) * (-1);
+    presOperand.innerText = Number(presOperand.innerText) * (-1);
 })
 
 percentBtn.addEventListener('click', (e) => {
-    presOperand.innerHTML = Number(presOperand.innerHTML) * 100;
+    presOperand.innerText = Number(presOperand.innerText) * 100;
 })
 
 // operator buttons
 
 addBtn.addEventListener('click', (e) => {
-    operator.innerHTML = "+";
-    pastOperand.innerHTML = presOperand.innerHTML;
-    presOperand.innerHTML = '';
+    operator.innerText = "+";
+    pastOperand.innerText = presOperand.innerText;
+    presOperand.innerText = '';
 
 })
 
 subtractBtn.addEventListener('click', (e) => {
-    operator.innerHTML = "-";
-    pastOperand.innerHTML = presOperand.innerHTML;
-    presOperand.innerHTML = '';
+    operator.innerText = "-";
+    pastOperand.innerText = presOperand.innerText;
+    presOperand.innerText = '';
 })
 
 multiplyBtn.addEventListener('click', (e) => {
     operator.innerHTML = "&#xD7;";
-    pastOperand.innerHTML = presOperand.innerHTML;
-    presOperand.innerHTML = '';
+    pastOperand.innerText = presOperand.innerText;
+    presOperand.innerText = '';
 })
 
 divideBtn.addEventListener('click', (e) => {
-    operator.innerHTML = "÷";
-    pastOperand.innerHTML = presOperand.innerHTML;
-    presOperand.innerHTML = '';
+    operator.innerText = "÷";
+    pastOperand.innerText = presOperand.innerText;
+    presOperand.innerText = '';
 })
-
-function decipherOperator(operator) {
-    if (operator == "") {
-        return false;
-    }
-    else if (operator === "÷") {
-        return "divide";
-    }
-    else if (operator === "×") {
-        return "multiply";
-    }
-    else if (operator === "-") {
-        return "subtract";
-    }
-    else if (operator === "+") {
-        return "add";
-    }
-    else {
-        return false;
-    }
-}
