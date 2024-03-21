@@ -23,13 +23,20 @@ div {
     flex-direction: column;
 }
 
+.flex {
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+}
+
 .flex-grid {
     display: flex;
-    width: 500px;
+    /* width: 500px; */
     border-radius: 10px;
 }
 
 .flex-col {
+    width: 125px;
     flex: 1;
     background-color: white;
     text-align: center;
@@ -43,7 +50,7 @@ div {
     align-items: center;;
 }
 
-.flex-col-item:hover, .flex-row-item:hover {
+.flex-col-item:hover, .flex-row-item:hover{
     background-color: lightblue;
 }
 
@@ -91,3 +98,19 @@ div {
   .white-text {
     color: white;
   }
+
+  .arrow {
+    max-height: 75px;
+    max-width: 20px;
+  }
+
+  .arrow-container {
+    background-color: white;
+    height: 100px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+  }
+
