@@ -3,14 +3,11 @@
 // 2) refactor based on JS guys video
 // 3) "slide out" on the right side of calc for more advanced/custom functions
 
-// 2 types of operations:
-// binary, and unary 
-
 class Calculator{
     constructor(pastOperand, presOperand, operator) {
-        this.pastOperand = pastOperand; // <div>
-        this.presOperand = presOperand; // <div>
-        this.operator = operator; // <div>
+        this.pastOperand = pastOperand;
+        this.presOperand = presOperand;
+        this.operator = operator;
         console.log("Constructing Calculator object...");
         
         // console.log("presOperand = " + presOperand.innerText);
@@ -20,29 +17,28 @@ class Calculator{
         let newPresOperand = '';
         switch (currOperator) {
             case("divide"):
-                // console.log(this.pastOperand, this.presOperand);
-                newPresOperand = Number(this.pastOperand.innerText) / Number(this.presOperand.innerText);
+                newPresOperand = Number(pastOperand.innerText) / Number(presOperand.innerText);
                 break;
             case("multiply"):
-                newPresOperand = Number(this.pastOperand.innerText) * Number(this.presOperand.innerText);
+                newPresOperand = Number(pastOperand.innerText) * Number(presOperand.innerText);
                 break;
             case("subtract"):
-                newPresOperand = Number(this.pastOperand.innerText) - Number(this.presOperand.innerText);
+                newPresOperand = Number(pastOperand.innerText) - Number(presOperand.innerText);
                 break;
             case("add"):
-                newPresOperand = Number(this.pastOperand.innerText) + Number(this.presOperand.innerText);
+                newPresOperand = Number(pastOperand.innerText) + Number(presOperand.innerText);
                 break;
             default:
-                console.log("error with operator");
+                console.log("error with operator");            
         }
         this.clear();
         this.presOperand.innerText = newPresOperand;
     }
 
     clear() {
-        this.pastOperand.innerText = '';
-        this.operator.innerText = '';
-        this.presOperand.innerText = '';
+        pastOperand.innerText = '';
+        operator.innerText = '';
+        presOperand.innerText = '';
     }
 
     equals() {
@@ -56,17 +52,8 @@ class Calculator{
         }
     }
 
-    checkInput() {
-        if (this.presOperand === "" || this.pastOperand === "") {
-            return false;
-        }
-        
-        return false;
-    }
-
     append(value) {
-        if (this.presOperand.innerText.length > 12) {return}
-        this.presOperand.innerText = this.presOperand.innerText + value;
+        presOperand.innerText = presOperand.innerText + value;
     }
 
     decipherOperator(operator) {
@@ -98,23 +85,7 @@ const pastOperand = document.querySelector('[pastOperandBox]');
 const operator = document.querySelector('[operatorBox]');
 const presOperand = document.querySelector('[presOperandBox]');
 
-// slideout button 
-const slideOutBtn = document.querySelector('[slideout]');
-const sidebar = document.querySelector('[sidebar]');
-
-slideOutBtn.addEventListener('click', (e) => {
-    if (sidebar.style.display === "none") {
-        sidebar.style.display = "block";
-    }
-    else {
-        sidebar.style.display = "none";
-    }
-})
-
-
 calc = new Calculator(pastOperand, presOperand, operator);
-
-
 
 equalsBtn.addEventListener('click', (e) => {
     calc.equals();
@@ -145,9 +116,6 @@ decimalBtn.addEventListener('click', (e) => {
 })
 
 negateBtn.addEventListener('click', e => {
-    if (calc.checkInput() === false) {
-        return;
-    }
     presOperand.innerText = Number(presOperand.innerText) * (-1);
 })
 
